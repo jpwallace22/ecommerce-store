@@ -20,3 +20,16 @@ main {
   color: inherit;
   text-decoration: inherit;
 }
+h3.card-text {
+  padding: 1rem 0;
+}
+.rating span:last-child {
+  margin: 0.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  /* make cards with single line titles the same height as the doubles */
+  .home h6.card-title {
+    min-height: 39px;
+  }
+}
