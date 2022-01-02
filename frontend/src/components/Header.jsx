@@ -7,7 +7,9 @@ function Header() {
       <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
         <Container>
           <LinkContainer to="/">
-            <Navbar.Brand>My eCommerce</Navbar.Brand>
+            <Navbar.Brand>
+              My <span style={{ textTransform: "lowercase" }}>e</span>Commerce
+            </Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">

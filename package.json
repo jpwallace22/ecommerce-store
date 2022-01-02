@@ -1,0 +1,11 @@
+{
+  "name": "mycommerce",
+  "version": "1.0.0",
+  "description": "Fullstack MERN shopping cart app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server"
+  },
+  "author": "Justin Wallace",
+  "license": "ISC"
+}
