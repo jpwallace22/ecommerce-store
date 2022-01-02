@@ -62,6 +62,7 @@ function Rating({ value, text, color }) {
 
 Rating.defaultProps = {
   color: "#f5ce42",
+  value: 0,
 };
 
 Rating.propTypes = {
