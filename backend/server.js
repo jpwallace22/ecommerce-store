@@ -14,8 +14,10 @@ app.get("/", (req, res) => {
   res.send("API is running");
 });
 
+// base route from productRoutes
 app.use("/api/products", productRoutes);
 
+// 404 and error handling
 app.use(notFound);
 app.use(errorHandler);
 
