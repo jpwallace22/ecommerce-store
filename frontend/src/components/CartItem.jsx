@@ -20,7 +20,7 @@ function CartItem({ item }) {
 
   const removeFromCartHandler = () => {
     swal({
-      title: "Are you sure?",
+      text: `Do you wish to remove the ${item.name} from your cart?`,
       icon: "warning",
       buttons: true,
       dangerMode: true,

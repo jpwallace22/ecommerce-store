@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import swal from "sweetalert";
 import {
   Col,
   Row,
@@ -20,6 +21,7 @@ function ProductScreen() {
   const [qty, setQty] = useState(1);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const params = useParams();
 
   const productDetails = useSelector((state) => state.productDetails);
@@ -30,6 +32,15 @@ function ProductScreen() {
   }, [dispatch, params.id]);
 
   const addToCartHandler = () => {
+    swal({
+      title: "Good Choice!",
+      text: "Would you like to proceed to the cart?",
+      buttons: ["Continue Shopping", "Proceed to Cart"],
+    }).then((proceed) => {
+      if (proceed) {
+        navigate(`/cart`);
+      }
+    });
     dispatch(addToCart(product._id, qty));
   };
 

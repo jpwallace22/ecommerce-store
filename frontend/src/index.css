@@ -122,8 +122,30 @@ h3.card-text {
   display: inline-block;
   position: relative;
   text-align: center;
-  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-family: "Gill Sans", "Gill Sans MT", "Trebuchet MS", sans-serif;
   bottom: 1px;
+}
+.swal-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.swal-button {
+  border-radius: 0;
+}
+.swal-button--confirm {
+  background-color: #1a1a1a;
+  font-family: "Nunito Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol";
+  text-transform: uppercase;
+}
+.swal-button--confirm.swal-button--danger {
+  background-color: rgb(179, 16, 16);
+}
+.swal-button--confirm:hover,
+.swal-button--confirm:not([disabled]):hover {
+  background-color: #292929;
 }
 @keyframes lds-grid {
   0%,
