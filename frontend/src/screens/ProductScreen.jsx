@@ -12,8 +12,9 @@ import {
 } from "react-bootstrap";
 import Rating from "../components/Rating";
 import Loader from "../components/Loader";
-import { listProductDetails } from "../actions/productActions";
 import Message from "../components/Message";
+import { listProductDetails } from "../actions/productActions";
+import { addToCard } from "../actions/cartActions";
 
 function ProductScreen() {
   const [qty, setQty] = useState(1);
@@ -30,7 +31,7 @@ function ProductScreen() {
   }, [dispatch, params.id]);
 
   const addToCartHandler = () => {
-    navigate(`/cart/${params.id}?qty=${qty}`);
+    dispatch(addToCard(product._id, qty));
   };
 
   return (
