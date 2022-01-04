@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Col,
@@ -14,13 +14,12 @@ import Rating from "../components/Rating";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import { listProductDetails } from "../actions/productActions";
-import { addToCard } from "../actions/cartActions";
+import { addToCart } from "../actions/cartActions";
 
 function ProductScreen() {
   const [qty, setQty] = useState(1);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const params = useParams();
 
   const productDetails = useSelector((state) => state.productDetails);
@@ -31,7 +30,7 @@ function ProductScreen() {
   }, [dispatch, params.id]);
 
   const addToCartHandler = () => {
-    dispatch(addToCard(product._id, qty));
+    dispatch(addToCart(product._id, qty));
   };
 
   return (
@@ -45,10 +44,10 @@ function ProductScreen() {
         <Message variant="danger">{error}</Message>
       ) : (
         <Row>
-          <Col md={6}>
+          <Col md={5} lg={6}>
             <Image src={product.image} alt={product.name} fluid />
           </Col>
-          <Col md={3}>
+          <Col md={4} lg={3}>
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <h3>{product.name}</h3>
@@ -93,7 +92,9 @@ function ProductScreen() {
                         <Form.Control
                           as="select"
                           value={qty}
-                          onChange={({ target }) => setQty(target.value)}
+                          onChange={({ target }) =>
+                            setQty(Number(target.value))
+                          }
                         >
                           {[...Array(product.countInStock).keys()].map((x) => (
                             <option key={x + 1} value={x + 1}>
