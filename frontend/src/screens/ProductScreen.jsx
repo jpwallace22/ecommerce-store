@@ -35,13 +35,22 @@ function ProductScreen() {
     swal({
       title: "Good Choice!",
       text: "Would you like to proceed to the cart?",
-      buttons: ["Continue Shopping", "Proceed to Cart"],
-    }).then((proceed) => {
-      if (proceed) {
-        navigate(`/cart`);
+      buttons: {
+        cancel: "Continue Shopping",
+        confirm: {
+          text: "Proceed to Cart",
+          value: "proceed",
+        },
+      },
+    }).then((value) => {
+      switch (value) {
+        case "proceed":
+          navigate(`/cart`);
+          break;
+        default:
+          navigate(`/`);
       }
     });
-    dispatch(addToCart(product._id, qty));
   };
 
   return (
