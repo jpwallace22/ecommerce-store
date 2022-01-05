@@ -1,3 +1,9 @@
+/**
+ * * DATA FOR TEST PURPOSES *
+ * ! DESTROY AFTER DEV !
+ *
+ */
+
 const products = [
   {
     name: "Airpods Wireless Bluetooth Headphones",

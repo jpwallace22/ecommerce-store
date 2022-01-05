@@ -1,5 +1,11 @@
 import bcrypt from "bcryptjs";
 
+/**
+ * * DATA FOR TEST PURPOSES *
+ * ! DESTROY AFTER DEV !
+ *
+ */
+
 const users = [
   {
     name: "Admin User",

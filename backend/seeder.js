@@ -12,6 +12,13 @@ dotenv.config();
 
 connectDB();
 
+/**
+ *
+ * * POPULATE/DESTROY DATA FOR TEST PURPOSES *
+ * ! DESTROY AFTER DEV !
+ *
+ */
+
 const importData = async () => {
   try {
     await Order.deleteMany();
