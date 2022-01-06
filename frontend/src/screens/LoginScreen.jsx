@@ -35,8 +35,9 @@ function LoginScreen() {
       <h1>Sign In</h1>
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email">
-          <Form.Label>Email Address</Form.Label>
+          <Form.Label className="ms-1">Email Address</Form.Label>
           <Form.Control
+            className="mb-3"
             type="email"
             placeholder="Enter email"
             value={email}
@@ -44,8 +45,9 @@ function LoginScreen() {
           ></Form.Control>
         </Form.Group>
         <Form.Group controlId="password">
-          <Form.Label>Password</Form.Label>
+          <Form.Label className="ms-1">Password</Form.Label>
           <Form.Control
+            className="mb-3"
             type="password"
             placeholder="Enter password"
             value={password}
@@ -57,7 +59,7 @@ function LoginScreen() {
         </Button>
       </Form>
       <Row className="py-3">
-        <Col>
+        <Col className="ms-1">
           New Customer?{" "}
           <Link to={redirect ? `/register?redirect=${redirect}` : `/register`}>
             Register
