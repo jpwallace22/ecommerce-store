@@ -26,9 +26,6 @@ function CartItem({ item }) {
       dangerMode: true,
     }).then((willDelete) => {
       if (willDelete) {
-        swal("Poof! Its gone.", {
-          icon: "success",
-        });
         dispatch(removeFromCart(item._id));
       }
     });

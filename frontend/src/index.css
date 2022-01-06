@@ -132,6 +132,14 @@ h3.card-text {
 }
 .swal-button {
   border-radius: 0;
+  background-color: rgb(242, 242, 242);
+  color: rgb(82, 82, 82);
+}
+.swal-button.swal-button--shop:hover {
+  background-color: rgb(250, 250, 250);
+}
+.swal-button--cancel {
+  background-color: rgb(242, 242, 242);
 }
 .swal-button--confirm {
   background-color: #1a1a1a;
@@ -139,13 +147,15 @@ h3.card-text {
     Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol";
   text-transform: uppercase;
+  color: rgb(242, 242, 242);
 }
 .swal-button--confirm.swal-button--danger {
   background-color: rgb(179, 16, 16);
+  color: rgb(242, 242, 242);
 }
 .swal-button--confirm:hover,
 .swal-button--confirm:not([disabled]):hover {
-  background-color: #292929;
+  background-color: #353535;
 }
 @keyframes lds-grid {
   0%,

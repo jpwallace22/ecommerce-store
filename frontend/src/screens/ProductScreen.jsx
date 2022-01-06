@@ -43,11 +43,17 @@ function ProductScreen() {
     //   });
     //   dispatch(addToCart(product._id, qty));
     // };
+    dispatch(addToCart(product._id, qty));
+
     swal({
-      title: "Good Choice!",
+      title: "Added to cart",
       text: "Would you like to proceed to the cart?",
+      icon: "success",
       buttons: {
-        cancel: "Continue Shopping",
+        shop: {
+          text: "Continue Shopping",
+          value: "shop",
+        },
         confirm: {
           text: "Proceed to Cart",
           value: "proceed",
@@ -56,12 +62,12 @@ function ProductScreen() {
     }).then((value) => {
       switch (value) {
         case "proceed":
-          dispatch(addToCart(product._id, qty));
           navigate(`/cart`);
           break;
-        default:
-          dispatch(addToCart(product._id, qty));
+        case "shop":
           navigate(`/`);
+          break;
+        default:
       }
     });
   };
