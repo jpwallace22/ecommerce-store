@@ -1,6 +1,7 @@
 import { addToCart, removeFromCart } from "../actions/cartActions";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import swal from "sweetalert";
 import {
   Col,
@@ -62,5 +63,9 @@ function CartItem({ item }) {
     </ListGroup.Item>
   );
 }
+
+CartItem.propTypes = {
+  item: PropTypes.object.isRequired,
+};
 
 export default CartItem;

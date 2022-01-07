@@ -4,11 +4,13 @@ import {
   USER_LOGIN_REQUEST,
   USER_LOGIN_FAIL,
   USER_LOGIN_SUCCESS,
+  USER_LOGOUT,
   USER_REGISTER_REQUEST,
   USER_REGISTER_FAIL,
   USER_REGISTER_SUCCESS,
 } from "../constants/userConstants";
 
+//log the user in and store info in session storage
 export const login = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: USER_LOGIN_REQUEST });
@@ -23,7 +25,6 @@ export const login = (email, password) => async (dispatch) => {
       config
     );
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
-
     // TODO set jwt to secure backside cookies
     sessionStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
@@ -37,12 +38,14 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 
+// log the user out
 export const logout = () => (dispatch) => {
   sessionStorage.removeItem("userInfo");
-  dispatch({ type: USER_REGISTER_FAIL });
+  dispatch({ type: USER_LOGOUT });
 };
 
-export const register = (email, password) => async (dispatch) => {
+// register a new user and log them in
+export const register = (name, email, password) => async (dispatch) => {
   try {
     dispatch({ type: USER_REGISTER_REQUEST });
     const config = {
@@ -51,12 +54,12 @@ export const register = (email, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      `api/users/register`,
-      { email, password },
+      `api/users`,
+      { name, email, password },
       config
     );
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
-
+    dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
     // TODO set jwt to secure backside cookies
     sessionStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
