@@ -34,7 +34,6 @@ const authUser = asyncHandler(async (req, res) => {
 const getUserProfile = asyncHandler(async (req, res) => {
   // req.user is generated in middleware
   const user = await User.findById(req.user._id);
-
   if (user) {
     res.json({
       _id: user._id,

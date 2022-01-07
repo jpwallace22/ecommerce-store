@@ -22,6 +22,7 @@ function RegisterScreen() {
     (state) => state.userRegister
   );
 
+  // will catch users logged in in and send them wherever needed (shipping)
   const redirect = location.search ? location.search.split("=")[1] : "/";
 
   useEffect(() => {

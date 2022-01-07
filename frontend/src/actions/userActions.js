@@ -8,6 +8,9 @@ import {
   USER_REGISTER_REQUEST,
   USER_REGISTER_FAIL,
   USER_REGISTER_SUCCESS,
+  USER_DETAILS_REQUEST,
+  USER_DETAILS_FAIL,
+  USER_DETAILS_SUCCESS,
 } from "../constants/userConstants";
 
 //log the user in and store info in session storage
@@ -72,3 +75,33 @@ export const register = (name, email, password) => async (dispatch) => {
     });
   }
 };
+
+// Get full user details for profile page
+export const getUserDetails =
+  (idOrProfileString) => async (dispatch, getState) => {
+    try {
+      dispatch({ type: USER_DETAILS_REQUEST });
+      const {
+        userLogin: { userInfo },
+      } = getState();
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+      const { data } = await axios.get(
+        `api/users/${idOrProfileString}`,
+        config
+      );
+      dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
+    } catch (error) {
+      dispatch({
+        type: USER_DETAILS_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
