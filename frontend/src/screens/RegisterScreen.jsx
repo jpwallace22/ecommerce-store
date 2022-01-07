@@ -38,8 +38,8 @@ function RegisterScreen() {
         setMessage("");
       }, 3000);
     } else {
+      dispatch(register(name, email, password));
     }
-    dispatch(register(name, email, password));
   };
 
   return (
