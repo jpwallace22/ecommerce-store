@@ -1,14 +1,20 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { Button, Row, Col, ListGroup, Card } from "react-bootstrap";
 import Message from "../components/Message";
 import { useNavigate } from "react-router-dom";
 import CartItem from "../components/CartItem";
+import { createOrder } from "../actions/orderActions";
 
 function PlaceOrderScreen() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { cartItems, shippingAddress, paymentMethod } = useSelector(
     (state) => state.cart
   );
+  const { order, success, error } = useSelector((state) => state.orderCreate);
 
   // calculate the prices (unary operator and toFixed for two decimal numbers)
   const itemsPrice = +cartItems
@@ -18,8 +24,25 @@ function PlaceOrderScreen() {
   const taxPrice = +(0.15 * itemsPrice).toFixed(2);
   const totalPrice = +(+itemsPrice + +shippingPrice + +taxPrice).toFixed(2);
 
+  useEffect(() => {
+    if (success) {
+      navigate(`/order/${order._id}`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [success, navigate]);
+
   const placeOrderHandler = () => {
-    //TODO add place order function
+    dispatch(
+      createOrder({
+        orderItems: cartItems,
+        shippingAddress,
+        paymentMethod,
+        itemsPrice,
+        shippingPrice,
+        taxPrice,
+        totalPrice,
+      })
+    );
   };
 
   return (
@@ -99,6 +122,11 @@ function PlaceOrderScreen() {
                   Place Order
                 </Button>
               </ListGroup.Item>
+              {error && (
+                <ListGroup.Item>
+                  <Message variant="danger">{error}</Message>
+                </ListGroup.Item>
+              )}
             </ListGroup>
           </Card>
         </Col>

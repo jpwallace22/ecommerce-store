@@ -1,6 +1,5 @@
 import axios from "axios";
 import {
-  //  USER_LOGOUT,
   USER_LOGIN_REQUEST,
   USER_LOGIN_FAIL,
   USER_LOGIN_SUCCESS,
@@ -30,6 +29,7 @@ export const login = (email, password) => async (dispatch) => {
       { email, password },
       config
     );
+    // returns userInfo with JWT
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
     // TODO set jwt to secure backside cookies
     sessionStorage.setItem("userInfo", JSON.stringify(data));
@@ -59,11 +59,14 @@ export const register = (name, email, password) => async (dispatch) => {
         "Content-Type": "application/json",
       },
     };
+    //axios data is automatically a JSON
     const { data } = await axios.post(
       `api/users`,
       { name, email, password },
       config
     );
+    //TODO --when I add more info on the login process I will need to add
+    //TODO --a separate payload for the login success
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
     // TODO set jwt to secure backside cookies
@@ -81,9 +84,12 @@ export const register = (name, email, password) => async (dispatch) => {
 
 // Get full user details for profile page
 export const getUserDetails =
+  //can pull user details using their ID or using the sting 'profile"
+  //if the user is logged in
   (idOrProfileString) => async (dispatch, getState) => {
     try {
       dispatch({ type: USER_DETAILS_REQUEST });
+      // get userInfo out of state for JWT and add to header config
       const {
         userLogin: { userInfo },
       } = getState();
@@ -93,6 +99,7 @@ export const getUserDetails =
           Authorization: `Bearer ${userInfo.token}`,
         },
       };
+      //axios data is automatically a JSON
       const { data } = await axios.get(
         `api/users/${idOrProfileString}`,
         config
@@ -113,6 +120,7 @@ export const getUserDetails =
 export const updateUserDetails = (user) => async (dispatch, getState) => {
   try {
     dispatch({ type: USER_UPDATE_REQUEST });
+    // get userInfo out of state for JWT and put it in header config
     const {
       userLogin: { userInfo },
     } = getState();
@@ -122,7 +130,9 @@ export const updateUserDetails = (user) => async (dispatch, getState) => {
         Authorization: `Bearer ${userInfo.token}`,
       },
     };
+    //axios data is automatically a JSON
     const { data } = await axios.put(`api/users/profile`, user, config);
+    //separate payload for userLogin to update login state
     const loginPayload = {
       _id: data._id,
       name: data.name,

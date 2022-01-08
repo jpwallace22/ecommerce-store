@@ -4,6 +4,7 @@ import { config } from "dotenv";
 import colors from "colors";
 import productRoutes from "./routes/productRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js";
 
 const app = express();
@@ -20,9 +21,10 @@ app.get("/", (req, res) => {
 
 // base route from productRoutes
 app.use("/api/products", productRoutes);
-
 //base route from userRoutes
 app.use("/api/users", userRoutes);
+//base route from orderRoutes
+app.use("/api/orders", orderRoutes);
 
 // 404 and error handling
 app.use(notFound);
