@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
-import { getUserDetails } from "../actions/userActions";
+import { getUserDetails, updateUserDetails } from "../actions/userActions";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -18,16 +18,15 @@ function ProfileScreen() {
 
   const { loading, error, user } = useSelector((state) => state.userDetails);
   const { userInfo } = useSelector((state) => state.userLogin);
+  const { success } = useSelector((state) => state.userUpdate);
 
   useEffect(() => {
     if (!userInfo) {
       navigate("/login", { replace: true });
     } else {
       if (!user.name) {
-        console.log("get user deets");
         dispatch(getUserDetails("profile"));
       } else {
-        console.log("Else Statment");
         setName(user.name);
         setEmail(user.email);
       }
@@ -42,7 +41,7 @@ function ProfileScreen() {
         setMessage("");
       }, 3000);
     } else {
-      // TODO dispatch update profile
+      dispatch(updateUserDetails({ id: user._id, name, email, password }));
     }
   };
 
@@ -91,12 +90,13 @@ function ProfileScreen() {
               onChange={({ target }) => setConfirmPassword(target.value)}
             ></Form.Control>
           </Form.Group>
-          <Button type="submit" variant="primary">
+          <Button type="submit" variant="primary" className="mb-3">
             Update Info
           </Button>
         </Form>
         {error && <Message variant="danger">{error}</Message>}
         {message && <Message variant="danger">Passwords do not match</Message>}
+        {success && <Message variant="success">Profile Updated</Message>}
         {loading && <Loader />}
       </Col>
       <Col md={9}>
