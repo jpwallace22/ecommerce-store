@@ -42,7 +42,7 @@ function CartItem({ item }) {
           <Link to={`/product/${item._id}`}>{item.name}</Link>
         </Col>
         <Col className="me-3" md={2}>
-          ${item.price * item.qty}
+          ${(item.price * item.qty).toFixed(2)}
         </Col>
         <Col md={2}>
           <FormControl as="select" value={item.qty} onChange={addToCartHandler}>

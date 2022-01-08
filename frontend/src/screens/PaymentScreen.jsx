@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { savePaymentMethod } from "../actions/cartActions";
-import { Button, Form, Col, Row } from "react-bootstrap";
+import { Button, Form, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 function PaymentScreen() {
