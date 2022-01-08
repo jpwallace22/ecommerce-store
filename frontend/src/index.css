@@ -8,7 +8,25 @@ body {
 }
 a {
   text-decoration: inherit;
-  /* font-weight: 300; */
+}
+.checkout a.complete-step {
+  position: relative;
+  color: white;
+}
+.checkout a.complete-step:before {
+  content: "";
+  position: absolute;
+  top: 6px;
+  right: -20px;
+  bottom: 4px;
+  left: -5px;
+  z-index: -1;
+  background: #1a1a1a;
+  transform: skew(-40deg);
+  border-radius: 5px;
+}
+main a {
+  font-weight: 500;
 }
 .cart a {
   font-weight: 500;

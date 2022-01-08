@@ -1,6 +1,7 @@
 import {
   CART_ADD_ITEM,
   CART_REMOVE_ITEM,
+  CART_SAVE_PAYMENT_METHOD,
   CART_SAVE_SHIPPING_ADDRESS,
 } from "../constants/cartConstants";
 
@@ -11,8 +12,9 @@ export const cartReducer = (
   switch (action.type) {
     case CART_ADD_ITEM:
       const item = action.payload;
+      //check if the item currently exists in the cart
       const existItem = state.cartItems.find((x) => x._id === item._id);
-
+      //if item does exist, return everything and update that one item
       if (existItem) {
         return {
           ...state,
@@ -21,6 +23,7 @@ export const cartReducer = (
           ),
         };
       } else {
+        // if doesn't exist, add it to the state
         return {
           ...state,
           cartItems: [...state.cartItems, item],
@@ -35,6 +38,11 @@ export const cartReducer = (
       return {
         ...state,
         shippingAddress: action.payload,
+      };
+    case CART_SAVE_PAYMENT_METHOD:
+      return {
+        ...state,
+        paymentMethod: action.payload,
       };
     default:
       return state;
