@@ -25,7 +25,7 @@ export const login = (email, password) => async (dispatch) => {
       },
     };
     const { data } = await axios.post(
-      `api/users/login`,
+      `/api/users/login`,
       { email, password },
       config
     );
@@ -61,12 +61,12 @@ export const register = (name, email, password) => async (dispatch) => {
     };
     //axios data is automatically a JSON
     const { data } = await axios.post(
-      `api/users`,
+      `/api/users`,
       { name, email, password },
       config
     );
     //TODO --when I add more info on the login process I will need to add
-    //TODO --a separate payload for the login success
+    //a separate payload for the login success
     dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
     dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
     // TODO set jwt to secure backside cookies
