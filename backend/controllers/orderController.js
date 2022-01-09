@@ -16,7 +16,7 @@ export const addOrderItems = asyncHandler(async (req, res) => {
     shippingPrice,
     totalPrice,
   } = req.body;
-
+  //return the new order if 201, throw error if not
   if (orderItems && orderItems.length === 0) {
     res.status(400);
     throw new Error("No order items");
@@ -32,7 +32,6 @@ export const addOrderItems = asyncHandler(async (req, res) => {
       shippingPrice,
       totalPrice,
     });
-
     const createdOrder = await order.save();
     res.status(201).json(createdOrder);
   }
@@ -48,7 +47,7 @@ export const getOrderById = asyncHandler(async (req, res) => {
     "user",
     "name email"
   );
-
+  //return the order if its available, or throw error if not
   if (order) {
     res.json(order);
   } else {
