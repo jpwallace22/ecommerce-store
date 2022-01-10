@@ -64,6 +64,9 @@ export const getOrderById = asyncHandler(async (req, res) => {
 export const updateOrderToPaid = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id);
   //return the order if its available, or throw error if not
+  console.log(req.body); //? this shoes the body (as expected)
+  console.log(req.body.payer); //? this shows undefined
+  // console.log(req.body.payer.email_address) //? this will throw a 500
   if (order) {
     order.isPaid = true;
     order.paidAt = Date.now();
@@ -71,7 +74,7 @@ export const updateOrderToPaid = asyncHandler(async (req, res) => {
       id: req.body.id,
       status: req.body.status,
       update_time: req.body.update_time,
-      email_address: req.body.payer.email_address,
+      // email_address: req.body.payer.email_address, //! cant read the email address from the body. Still trying to figure out why.
     };
     const updatedOrder = await order.save();
     res.json(updatedOrder);
